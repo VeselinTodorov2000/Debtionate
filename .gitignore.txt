@@ -1,0 +1,25 @@
+# Общи Node.js и Angular правила
+node_modules/
+dist/
+npm-debug.log*
+
+# IntelliJ IDEA / Eclipse / VSCode
+.idea/
+*.iml
+*.class
+*.log
+.vscode/
+
+# Maven / Java
+target/
+*.jar
+*.war
+*.ear
+
+# Docker
+*.env
+docker-compose.override.yml
+
+# OS-specific
+.DS_Store
+Thumbs.db
