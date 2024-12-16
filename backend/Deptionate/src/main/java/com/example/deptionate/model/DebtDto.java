@@ -1,32 +1,19 @@
-package com.example.deptionate.entity;
-
-import jakarta.persistence.*;
+package com.example.deptionate.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-@Table(name="debts")
-public class Debt extends AbstractEntity {
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(name = "amount", nullable = false)
+public class DebtDto extends AbstractDto {
+    private UserDto user;
     private BigDecimal amount;
-
-    @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
-
-    @Column(name = "status", nullable = false)
     private String status;
 
-    public User getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 
