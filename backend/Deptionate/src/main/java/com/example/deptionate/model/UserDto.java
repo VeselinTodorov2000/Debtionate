@@ -1,19 +1,8 @@
-package com.example.deptionate.entity;
+package com.example.deptionate.model;
 
-import jakarta.persistence.*;
-
-import java.util.List;
-
-@Entity
-@Table(name="users")
-public class User extends AbstractEntity {
-    @Column(name = "name", nullable = false)
+public class UserDto extends AbstractDto {
     private String name;
-
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "password", nullable = false)
     private String password;
 
     public String getName() {
