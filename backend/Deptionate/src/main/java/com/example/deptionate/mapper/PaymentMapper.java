@@ -17,7 +17,7 @@ public class PaymentMapper {
         entity.setId(dto.getId());
         entity.setCreatedAt(dto.getCreatedAt());
         entity.setUpdatedAt(dto.getUpdatedAt());
-        entity.setDebt(debtMapper.mapDtoToEntity(dto.getDebt()));
+//        entity.setDebt(debtMapper.mapDtoToEntity(dto.getDebt()));
         entity.setAmount(dto.getAmount());
         entity.setPaymentDate(dto.getPaymentDate());
         return entity;
@@ -30,7 +30,7 @@ public class PaymentMapper {
         dto.setId(entity.getId());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
-        dto.setDebt(debtMapper.mapEntityToDto(entity.getDebt()));
+//        dto.setDebt(debtMapper.mapEntityToDto(entity.getDebt()));
         dto.setAmount(entity.getAmount());
         dto.setPaymentDate(entity.getPaymentDate());
         return dto;

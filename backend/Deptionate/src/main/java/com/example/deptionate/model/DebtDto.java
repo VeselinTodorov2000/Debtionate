@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class DebtDto extends AbstractDto {
-    private UserDto user;
+    private Long userId;
     private BigDecimal amount;
     private LocalDate dueDate;
     private String status;
 
-    public UserDto getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDto user) {
-        this.user = user;
+    public void setUserId(Long user) {
+        this.userId = user;
     }
 
     public BigDecimal getAmount() {
