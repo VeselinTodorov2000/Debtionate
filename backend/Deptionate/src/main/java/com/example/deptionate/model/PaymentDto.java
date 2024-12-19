@@ -1,19 +1,20 @@
 package com.example.deptionate.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PaymentDto extends AbstractDto {
-    private DebtDto debt;
+    private Long debtId;
     private BigDecimal amount;
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
-    public DebtDto getDebt() {
-        return debt;
+    public Long getDebtId() {
+        return debtId;
     }
 
-    public void setDebt(DebtDto debt) {
-        this.debt = debt;
+    public void setDebtId(Long debtId) {
+        this.debtId = debtId;
     }
 
     public BigDecimal getAmount() {
@@ -24,11 +25,11 @@ public class PaymentDto extends AbstractDto {
         this.amount = amount;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

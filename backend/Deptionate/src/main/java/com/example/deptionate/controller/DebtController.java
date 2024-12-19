@@ -28,7 +28,7 @@ public class DebtController {
     @PostMapping("/create")
     public ResponseEntity<DebtDto> create(@RequestBody DebtDto debtDto) {
         Optional<User> user = userService.findById(debtDto.getUserId());
-        Debt debt = debtService.create(debtMapper.mapDtoToEntity(debtDto, user));
+        Debt debt = debtService.create(debtMapper.mapDtoToEntity(debtDto, user.orElseGet(null)));
         if (debt != null) {
             DebtDto createdDebtDto = debtMapper.mapEntityToDto(debt);
             return new ResponseEntity<>(createdDebtDto, HttpStatus.CREATED);
@@ -48,10 +48,17 @@ public class DebtController {
         }
     }
 
+    @GetMapping("/user/{id}")
+    List<DebtDto> findDebtsByUserId(@PathVariable Long id) {
+        return debtService.findDebtsByUserId(id).stream()
+                .map(debtMapper::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
     @PutMapping
     public ResponseEntity<DebtDto> update(@RequestBody DebtDto debtDto) {
         Optional<User> user = userService.findById(debtDto.getUserId());
-        Debt debt = debtMapper.mapDtoToEntity(debtDto, user);
+        Debt debt = debtMapper.mapDtoToEntity(debtDto, user.orElseGet(null));
         return new ResponseEntity<>(debtMapper.mapEntityToDto(debtService.update(debt)), HttpStatus.OK);
     }
 
@@ -62,12 +69,5 @@ public class DebtController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping("/debts/{id}")
-    List<DebtDto> findDebtsByUserId(@PathVariable Long id) {
-        return debtService.findDebtsByUserId(id).stream()
-                .map(debtMapper::mapEntityToDto)
-                .collect(Collectors.toList());
     }
 }
