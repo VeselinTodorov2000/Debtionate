@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/payments")
+@RequestMapping("/api/payments")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;

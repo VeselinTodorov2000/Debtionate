@@ -1,11 +1,11 @@
 package com.example.deptionate.entity;
 
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User extends AbstractEntity {
     @Column(name = "name", nullable = false)
     private String name;
