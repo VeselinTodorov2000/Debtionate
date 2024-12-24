@@ -1,4 +1,4 @@
-package com.example.deptionate.controller;
+package com.example.deptionate.web;
 
 import com.example.deptionate.entity.Debt;
 import com.example.deptionate.entity.User;
