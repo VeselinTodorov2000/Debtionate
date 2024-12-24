@@ -10,17 +10,15 @@ import java.util.Optional;
 
 @Component
 public class DebtMapper {
-    @Autowired
-    private UserMapper userMapper;
 
-    public Debt mapDtoToEntity(DebtDto dto, Optional<User> user) {
+    public Debt mapDtoToEntity(DebtDto dto, User user) {
         if (dto == null) return null;
 
         Debt entity = new Debt();
         entity.setId(dto.getId());
         entity.setCreatedAt(dto.getCreatedAt());
         entity.setUpdatedAt(dto.getUpdatedAt());
-        entity.setUser(user.get());
+        entity.setUser(user);
         entity.setAmount(dto.getAmount());
         entity.setDueDate(dto.getDueDate());
         entity.setStatus(dto.getStatus());

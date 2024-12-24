@@ -3,6 +3,7 @@ package com.example.deptionate.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,7 +17,7 @@ public class Payment extends AbstractEntity {
     private BigDecimal amount;
 
     @Column(name = "payment_date", nullable = false)
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     public Debt getDebt() {
         return debt;
@@ -34,11 +35,11 @@ public class Payment extends AbstractEntity {
         this.amount = amount;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

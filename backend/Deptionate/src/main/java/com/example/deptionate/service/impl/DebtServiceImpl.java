@@ -15,8 +15,6 @@ import java.util.Optional;
 public class DebtServiceImpl implements DebtService {
     @Autowired
     private DebtDao debtDao;
-    @Autowired
-    private UserDao userDao;
 
     @Override
     public Debt create(Debt debt) {

@@ -23,3 +23,7 @@ docker-compose.override.yml
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# JaCoCo
+jacoco.exec
+target/jacoco-report/

@@ -9,4 +9,5 @@
     <include relativeToChangelogFile="true" file="debts.sql"/>
     <include relativeToChangelogFile="true" file="payments.sql"/>
     <include relativeToChangelogFile="true" file="0005.sql"/>
+    <include relativeToChangelogFile="true" file="0007.sql"/>
 </databaseChangeLog>
