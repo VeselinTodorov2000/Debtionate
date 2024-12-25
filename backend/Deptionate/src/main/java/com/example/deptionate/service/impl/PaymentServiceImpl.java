@@ -1,6 +1,5 @@
 package com.example.deptionate.service.impl;
 
-import com.example.deptionate.entity.Debt;
 import com.example.deptionate.entity.Payment;
 import com.example.deptionate.repository.PaymentDao;
 import com.example.deptionate.service.PaymentService;
@@ -14,15 +13,14 @@ import java.util.Optional;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
+    private final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
     @Autowired
     private PaymentDao paymentDao;
-
-    private final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
     @Override
     public Payment create(Payment payment) {
         Payment createdPayment = paymentDao.save(payment);
-        logger.info("Payment with id: {} created: ", createdPayment);
+        logger.info("Payment with id: {} created: ", createdPayment.getId());
         return createdPayment;
     }
 
