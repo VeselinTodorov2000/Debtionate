@@ -1,0 +1,31 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        Email is required!
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        Enter valid email!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Парола</mat-label>
+      <input matInput formControlName="password" type="password" required />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Парола е задължителна!
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Вход
+    </button>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

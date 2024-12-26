@@ -1,19 +1,24 @@
 package com.example.deptionate.web;
 
+import com.example.deptionate.auth.AuthResponse;
 import com.example.deptionate.entity.User;
 import com.example.deptionate.mapper.UserMapper;
+import com.example.deptionate.model.LoginRequestDto;
 import com.example.deptionate.model.UserDto;
 import com.example.deptionate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private UserService userService;
     @Autowired
@@ -28,6 +33,19 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequest) {
+        Optional<User> user = userService.findByEmail(loginRequest.getEmail());
+        if(user.isEmpty() || !passwordEncoder.matches(loginRequest.getPassword(), user.get().getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+
+        return ResponseEntity.ok(new AuthResponse(
+                user.get().getId(),
+                user.get().getName()
+        ));
     }
 
     @GetMapping("/{id}")

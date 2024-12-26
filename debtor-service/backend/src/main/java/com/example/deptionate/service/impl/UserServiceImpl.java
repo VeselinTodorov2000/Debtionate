@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        logger.debug("Find user by email: {}", email);
+        return userDao.findByEmail(email);
+    }
+
+    @Override
     public User update(User user) {
         User existingUser = userDao.findById(user.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
