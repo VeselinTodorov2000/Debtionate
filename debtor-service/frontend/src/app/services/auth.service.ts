@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/users';  // Използваме бекенд адреса
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) { }
 
