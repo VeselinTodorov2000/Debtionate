@@ -15,4 +15,6 @@ public interface PaymentService {
     boolean delete(Long id);
 
     List<Payment> findPaymentsByDebtId(Long debtId);
+
+    void processPayment(Payment payment);
 }

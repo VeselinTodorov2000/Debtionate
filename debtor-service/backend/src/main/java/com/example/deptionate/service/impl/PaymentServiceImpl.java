@@ -1,12 +1,15 @@
 package com.example.deptionate.service.impl;
 
 import com.example.deptionate.entity.Payment;
+import com.example.deptionate.general.AmountException;
+import com.example.deptionate.messaging.PaymentProducer;
 import com.example.deptionate.repository.PaymentDao;
 import com.example.deptionate.service.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +19,15 @@ public class PaymentServiceImpl implements PaymentService {
     private final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
     @Autowired
     private PaymentDao paymentDao;
+    @Autowired
+    private PaymentProducer paymentProducer;
 
     @Override
+    @Transactional(rollbackFor = AmountException.class)
     public Payment create(Payment payment) {
         Payment createdPayment = paymentDao.save(payment);
         logger.info("Payment with id: {} created: ", createdPayment.getId());
+        processPayment(createdPayment);
         return createdPayment;
     }
 
@@ -60,5 +67,14 @@ public class PaymentServiceImpl implements PaymentService {
         }
         logger.info("Payment with id:{} failed to delete", id);
         return false;
+    }
+
+    @Override
+    public void processPayment(Payment payment) {
+        if (payment.getAmount().compareTo(payment.getDebt().getAmount()) > 0) {
+            logger.error("Amount is greater than debt amount");
+            throw new AmountException("Payment amount is greater than debt amount. Payment not processed");
+        }
+        paymentProducer.sendPayment(payment);
     }
 }

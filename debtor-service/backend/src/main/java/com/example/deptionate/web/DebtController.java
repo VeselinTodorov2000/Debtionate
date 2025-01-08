@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/debts")
-@CrossOrigin(origins = "http://localhost:4200")
 public class DebtController {
     @Autowired
     private DebtService debtService;
